@@ -6,7 +6,7 @@ from datetime import timedelta
 
 app = Flask(__name__)
 app.secret_key = "Administrator"
-app.permanent_session_lifetime = timedelta(days=1)
+app.permanent_session_lifetime = timedelta(minutes=1)
 app.register_blueprint(User)
 app.register_blueprint(Pageuse)
 app.register_blueprint(Document_products)
