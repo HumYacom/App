@@ -1,0 +1,56 @@
+{% extends "login/layout.html"%}
+
+{% block content %}
+<br><br><br><br><br><br>
+<div class="d-flex justify-content-center">
+  <h1>Register user stock</h1>
+</div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>{{msg}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="d-flex justify-content-center">
+  <form action="{{url_for('User.Adduser')}}" method="POST">
+    <div class="form-group">
+      
+      <input type="hidden" class="form-control" id="" name="TextID" required>
+    </div>
+
+    <div class="form-group">
+      <label for="">Name</label>
+      <input type="text" class="form-control" id="" name="Name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="">Username</label>
+      <input type="text" class="form-control" id="" name="Username" required>
+    </div>
+
+    <div class="form-group">
+      <label for="">Password</label>
+      <input type="password" class="form-control" id="" name="Password" required>
+    </div>
+
+    <div class="form-group">
+      <label for="">Re-password</label>
+      <input type="password" class="form-control" id="" name="Repassword" required>
+    </div>
+    <br>
+
+    <div class="modal-footer">
+      <a href="{{url_for('User.loginpage')}}" class="btn btn-primary">Revers</a> &nbsp
+      <button type="submit" class="btn btn-success">Success</button>
+    </div>
+
+  </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends "admin/layout_admin.html "%}
+
+{% block content %}
+<br><br><br><br><br><br>
+<h5 class="d-flex flex-row-reverse">Welcome user {{session['Name']}}</h5>
+<div class="d-flex flex-row-reverse">
+  <a href="/logout" class="btn btn-info">Logout</a>
+</div>
+<div class="container">
+  <h3 class="d-flex justify-content-center">รายการคำร้อง</h3>
+  <br>
+  <table class="table table-success table-striped">
+    <thead class="table-success">
+      <tr>
+        <th>ลำดับที่</th>
+        <th>ผู้ยืม</th>
+        <th>แผนก</th>
+        <th>ประเภท</th>
+        <th>จำนวน</th>
+        <th>วันที่ยืม</th>
+        <th>สถานะ</th>
+        <th>action</th>
+      </tr>
+    </thead>
+
+    {% for row in datas %}
+    <tbody>
+      <tr>
+        <td>{{row.0}}</td>
+        <td>{{row.1}}</td>
+        <td>{{row.2}}</td>
+        <td>{{row.3}}</td>
+        <td>{{row.4}}</td>
+        <td>{{row.5}}</td>
+        <td>{{row.6}}</td>
+        <td>
+          <button type="button" class="btn btn-warning" title="Edit" data-toggle="tooltip" data-bs-toggle="modal"
+            data-bs-target="#exampleModal{{row.0}}"><i class="bi bi-folder2-open"></i></button>
+          &nbsp
+          <button type="button" class="btn btn-danger" title="Delete" data-toggle="tooltip" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop{{row.0}}"><i class="bi bi-trash2-fill"></i></button>
+        </td>
+      </tr>
+      <!--Delect-->
+      <div class="modal fade" id="staticBackdrop{{row.0}}" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 text-black" id="staticBackdropLabel">ยืนยันการลบ ?</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{url_for('Document_products.Admin_del')}}" method="POST">
+
+              <div class="modal-body text-black">
+                <h3>Do you want deletc {{row.1}} ?</h3>
+              </div>
+              <input type="hidden" name="re_no" value="{{row.0}}">
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!--Update-->
+      <div class="modal fade" id="exampleModal{{row.0}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 text-black" id="exampleModalLabel">แก้ไขข้อมูล</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-black">
+              <form action="{{url_for('Document_products.Admin_edit')}}" method="POST">
+
+                <div class="form-group">
+                  <input type="hidden" class="form-control" id="" value="{{row.0}}" name="re_no">
+                </div>
+
+                <div class="form-group">
+                  <input type="hidden" class="form-control " id="" value="{{row.1}}" name="User_name">
+                </div>
+
+                <div class="form-group">
+                  <input type="hidden" class="form-control" id="" value="{{row.2}}" name="re_pstatus">
+                </div>
+
+                <div class="form-group">
+                  <input type="hidden" class="form-control " id="" value="{{row.3}}" name="Product_type">
+                </div>
+
+                <div class="form-group">
+                  <input type="hidden" class="form-control" id="" value="{{row.4}}" name="re_unit">
+                </div>
+
+                <div class="form-group">
+                  <input type="hidden" class="form-control " id="" value="{{row.5}}" name="re_date">
+                </div>
+
+                <div class="form-group">
+                  <label for="">สถานะ</label>
+                  <select class="form-select" name="re_status" aria-label="Default select example" value="{{row.6}}">
+                    <option value="ยืม">ยืม</option>
+                    <option value="คืน">คืน</option>
+                  </select>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-success">Success</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

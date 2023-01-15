@@ -1,0 +1,49 @@
+{% extends "login/layout.html"%}
+
+{% block content %}
+<br><br><br><br><br><br>
+<div class="d-flex justify-content-center">
+    <h1>Welcome to login stock</h1>
+</div>
+<input type="hidden" name="" value="{{status}}">
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+    {% if status == "wait" %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{msg}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% else %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{msg}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="d-flex justify-content-center">
+    <form action="{{url_for('User.Checklog')}}" method="POST">
+        <div class="form-group">
+            <label for="">Username or ID</label>
+            <input type="text" class="form-control" id="" name="Userid" required>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="">Password</label>
+            <input type="password" class="form-control" id="" name="Password" required>
+        </div>
+        <br>
+
+        <div class="modal-footer">
+            <a href="{{url_for('User.register')}}" class="btn btn-primary">Contact Admin</a> &nbsp
+            <button type="submit" class="btn btn-success">login</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

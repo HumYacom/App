@@ -1,0 +1,68 @@
+{% extends "user/layout_user.html "%}
+
+{% block content %}
+<br><br><br><br><br><br>
+<div class="d-flex justify-content-center">
+  <h3>ใบเบิกวัสดุ</h3>
+</div>
+<br>
+<div class="container">
+  <form action="{{url_for('Pageuse.userAdd')}}" method="POST">
+
+    <div class="form-group">
+      <input type="hidden" class="form-control" id="" name="re_no">
+    </div>
+
+    <div class="form-group">
+      <label for="">ผู้ยืม</label>
+      <input type="text" class="form-control" id="" name="User_name" required>
+    </div>&nbsp
+
+    <div class="form-group">
+      <label for="">แผนก</label>
+      <select class="form-select" name="re_pstatus" required aria-label="Default select example">
+        <option selected>กรุณาเลือกแผนก</option>
+        <option value="บัญชี">บัญชี</option>
+        <option value="ฝ่ายขาย">ฝ่ายขาย</option>
+        <option value="จัดซื้อ">จัดซื้อ</option>
+        <option value="บุคคล">บุคคล</option>
+        <option value="QC/QA">QC/QA</option>
+        <option value="วิจัยและพัฒนา">วิจัยและพัฒนา</option>
+        <option value="คลังสินค้า">คลังสินค้า</option>
+        <option value="ซ่อมบำรุง">ซ่อมบำรุง</option>
+        <option value="ผลิต">ผลิต</option>
+        <option value="IT">IT</option>
+      </select>
+    </div>&nbsp
+
+    <div class="form-group">
+      <label for="">ประเภทยืมวัสดุ</label>
+      <select class="form-select" name="Product_type" aria-label="Default select example">
+        <option selected>---วัสดุ---</option>
+        <option value="คอม">คอม</option>
+        <option value="machin">machin</option>
+        <option value="กล้อง">กล้อง</option>
+        <option value="บาสเก็ต">บาสเก็ต</option>
+      </select>
+    </div>&nbsp
+
+    <div class="form-group">
+      <label for="">จำนวน</label>
+      <input type="text" class="form-control" id="" name="re_unit" required>
+    </div>&nbsp
+
+    <div class="form-group">
+      <label for="">วันที่ยืม</label>
+      <input type="datetime-local" class="form-control" id="" name="re_date" required>
+    </div>
+    <br>&nbsp
+
+    <div class="modal-footer">
+      <a href="{{url_for('Pageuse.userindex')}}" class="btn btn-primary">Back</a> &nbsp
+      <button type="submit" class="btn btn-success">ตกลง</button>
+    </div>
+  </form>
+</div>
+
+
+{% endblock %}
