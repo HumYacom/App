@@ -1,0 +1,11 @@
+----products detail----
+SELECT Products.Product_id, Products.Product_name, inventory.Product_type, Products.Product_manner, Products.Product_price,Products.Product_date,inventory.type_id
+FROM Products
+INNER JOIN inventory ON Products.Product_type = inventory.Product_type;
+
+
+----borrow-----
+SELECT requisition.re_no, user.User_name, requisition.re_pstatus, inventory.Product_type, requisition.re_unit,	requisition.re_date,	requisition.re_status
+FROM ((requisition
+INNER JOIN inventory ON requisition.Product_type = inventory.Product_type)
+INNER JOIN user ON requisition.User_name = user.User_name);

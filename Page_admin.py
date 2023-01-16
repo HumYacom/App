@@ -30,7 +30,6 @@ def Admin_edit():
         re_pstatus = request.form['re_pstatus']
         Product_type = request.form['Product_type']
         re_unit = request.form['re_unit']
-        re_date = request.form['re_date']
         re_status = request.form['re_status']
 
         with db.cursor() as cur:

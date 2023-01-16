@@ -5,7 +5,37 @@
 <div class="d-flex justify-content-center">
   <h3>รายการวัสดุ</h3>
 </div>
-
+<br>
+<form action="{{url_for('Pageuse.cresher')}}" method="POST">
+  <div class="input-group input-daterange">
+    <input type="datetime-local" class="form-control" value="" name="dstart">
+    &nbsp<h5>ถึง</h5>&nbsp
+    <input type="datetime-local" class="form-control" value="" name="endstart">
+  </div>&nbsp
+  <div class="col-auto">
+    <button type="submit" class="btn btn-success">ค้นหา</button>&nbsp
+    <a href="/userindex" class="btn btn-primary">หน้าหลัก</a>
+  </div>
+</form>
+<br>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+{% if status == "wait" %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>{{msg}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% else %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>{{msg}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endwith %}
+{{Pagination.links}}
 <div class="container">
   <h5 class="align-self-start">รายการวัสดุ
     <a href="/Useradding" class="btn btn-warning"><i class="bi bi-node-plus-fill"></i>&nbsp ADD</a>
@@ -23,16 +53,16 @@
         <th>action</th>
       </tr>
     </thead>
-    {% for row in datas %}
+    {% for row in user %}
     <tbody>
       <tr>
-        <td>{{row.0}}</td>
-        <td>{{row.1}}</td>
-        <td>{{row.2}}</td>
-        <td>{{row.3}}</td>
-        <td>{{row.4}}</td>
-        <td>{{row.5}}</td>
-        <td>{{row.6}}</td>
+        <td>{{datas[row].0}}</td>
+        <td>{{datas[row].1}}</td>
+        <td>{{datas[row].2}}</td>
+        <td>{{datas[row].3}}</td>
+        <td>{{datas[row].4}}</td>
+        <td>{{datas[row].5}}</td>
+        <td>{{datas[row].6}}</td>
         <td>
           <button type="button" class="btn btn-warning" title="รายละเอียด"><i class="bi bi-folder2-open"></i></button>
         </td>
