@@ -1,0 +1,64 @@
+{% extends "admin/layout_admin.html "%}
+
+{% block content %}
+<br><br><br><br><br><br>
+<div class="d-flex justify-content-center">
+  <h3>ใบเบิกวัสดุ</h3>
+</div>
+<br>
+<div class="container">
+  <form action="{{url_for('PD.PDAdd')}}" method="POST">
+
+    <div class="form-group">
+      <input type="hidden" class="form-control" id="" name="Product_id" >
+    </div>&nbsp
+
+    <div class="form-group">
+      <label for="">ชื่อ</label>
+      <input type="text" class="form-control" id="" name="Product_name" >
+    </div>&nbsp
+
+    <div class="form-group">
+      <label for="">ชื่อประเภท</label>
+      <input type="text" class="form-control" id="" name="Product_type" >
+    </div>&nbsp
+
+    <div class="form-group">
+      <label for="">ยี่ห้อ</label>
+      <input type="text" class="form-control" id="" name="Product_manner" >
+    </div>&nbsp
+
+    <div class="form-group">
+      <label for="">จำนวน</label>
+      <input type="text" class="form-control" id="" name="Product_price" >
+    </div>&nbsp
+
+    <div class="form-group">
+      
+      <input type="hidden" class="form-control" id="" name="Product_date" >
+    </div>&nbsp
+
+    <div class="form-group">
+      <label for="">ชื่อระดับ</label>
+      <input type="text" class="form-control" id="" name="type_id" >
+    </div>&nbsp
+
+    <div class="form-group">
+      <label for="">หนวก</label>
+      <input type="text" class="form-control" id="" name="Product_status" >
+    </div>&nbsp
+
+    <div class="form-group">
+      <label for="">ประเภทวัสดุ</label>
+      <input type="text" class="form-control" id="" name="Product_category" >
+    </div>&nbsp
+
+<div class="modal-footer">
+  <a href="{{url_for('PD.pd')}}" class="btn btn-primary">Back</a> &nbsp
+  <button type="submit" class="btn btn-success">ตกลง</button>
+</div>
+</form>
+</div>
+
+
+{% endblock %}

@@ -7,8 +7,30 @@
   <a href="/logout" class="btn btn-info">Logout</a>
 </div>
 <div class="container">
-  <h3 class="d-flex justify-content-center">รายการคำร้อง</h3>
+  <h3 class="d-flex justify-content-center">รายการคำร้อง</h3><br>
+<form action="{{url_for('Document_products.cresheradmin')}}" method="POST">
+    <div class="d-inline-flex p-1">
+      <select name="dstart" class="form-select">
+        <option value="">----ค้นหา----</option>
+        <option value="บัญชี">บัญชี</option>
+        <option value="ฝ่ายขาย">ฝ่ายขาย</option>
+        <option value="จัดซื้อ">จัดซื้อ</option>
+        <option value="บุคคล">บุคคล</option>
+        <option value="QC/QA">QC/QA</option>
+        <option value="วิจัยและพัฒนา">วิจัยและพัฒนา</option>
+        <option value="คลังสินค้า">คลังสินค้า</option>
+        <option value="ซ่อมบำรุง">ซ่อมบำรุง</option>
+        <option value="ผลิต">ผลิต</option>
+        <option value="IT">IT</option>
+      </select>
+    </div><br>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-success">ค้นหา</button>
+      <a href="/Admin_index" class="btn btn-primary">หน้าหลัก</a>
+    </div>
+  </form>
   <br>
+{{Pagination.links}}
   <table class="table table-success table-striped">
     <thead class="table-success">
       <tr>
@@ -23,26 +45,26 @@
       </tr>
     </thead>
 
-    {% for row in datas %}
+    {% for row in user %}
     <tbody>
       <tr>
-        <td>{{row.0}}</td>
-        <td>{{row.1}}</td>
-        <td>{{row.2}}</td>
-        <td>{{row.3}}</td>
-        <td>{{row.4}}</td>
-        <td>{{row.5}}</td>
-        <td>{{row.6}}</td>
+        <td>{{datas[row].0}}</td>
+        <td>{{datas[row].1}}</td>
+        <td>{{datas[row].2}}</td>
+        <td>{{datas[row].3}}</td>
+        <td>{{datas[row].4}}</td>
+        <td>{{datas[row].5}}</td>
+        <td>{{datas[row].6}}</td>
         <td>
           <button type="button" class="btn btn-warning" title="Edit" data-toggle="tooltip" data-bs-toggle="modal"
-            data-bs-target="#exampleModal{{row.0}}"><i class="bi bi-folder2-open"></i></button>
+            data-bs-target="#exampleModal{{datas[row].0}}"><i class="bi bi-folder2-open"></i></button>
           &nbsp
           <button type="button" class="btn btn-danger" title="Delete" data-toggle="tooltip" data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop{{row.0}}"><i class="bi bi-trash2-fill"></i></button>
+            data-bs-target="#staticBackdrop{{datas[row].0}}"><i class="bi bi-trash2-fill"></i></button>
         </td>
       </tr>
       <!--Delect-->
-      <div class="modal fade" id="staticBackdrop{{row.0}}" data-bs-backdrop="static" data-bs-keyboard="false"
+      <div class="modal fade" id="staticBackdrop{{datas[row].0}}" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -53,9 +75,9 @@
             <form action="{{url_for('Document_products.Admin_del')}}" method="POST">
 
               <div class="modal-body text-black">
-                <h3>Do you want deletc {{row.1}} ?</h3>
+                <h3>Do you want deletc {{datas[row].1}} ?</h3>
               </div>
-              <input type="hidden" name="re_no" value="{{row.0}}">
+              <input type="hidden" name="re_no" value="{{datas[row].0}}">
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
@@ -67,7 +89,7 @@
       </div>
 
       <!--Update-->
-      <div class="modal fade" id="exampleModal{{row.0}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+      <div class="modal fade" id="exampleModal{{datas[row].0}}" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -79,32 +101,32 @@
               <form action="{{url_for('Document_products.Admin_edit')}}" method="POST">
 
                 <div class="form-group">
-                  <input type="hidden" class="form-control" id="" value="{{row.0}}" name="re_no">
+                  <input type="hidden" class="form-control" id="" value="{{datas[row].0}}" name="re_no">
                 </div>
 
                 <div class="form-group">
-                  <input type="hidden" class="form-control " id="" value="{{row.1}}" name="User_name">
+                  <input type="hidden" class="form-control " id="" value="{{datas[row].1}}" name="User_name">
                 </div>
 
                 <div class="form-group">
-                  <input type="hidden" class="form-control" id="" value="{{row.2}}" name="re_pstatus">
+                  <input type="hidden" class="form-control" id="" value="{{datas[row].2}}" name="re_pstatus">
                 </div>
 
                 <div class="form-group">
-                  <input type="hidden" class="form-control " id="" value="{{row.3}}" name="Product_type">
+                  <input type="hidden" class="form-control " id="" value="{{datas[row].3}}" name="Product_type">
                 </div>
 
                 <div class="form-group">
-                  <input type="hidden" class="form-control" id="" value="{{row.4}}" name="re_unit">
+                  <input type="hidden" class="form-control" id="" value="{{datas[row].4}}" name="re_unit">
                 </div>
 
                 <div class="form-group">
-                  <input type="hidden" class="form-control " id="" value="{{row.5}}" name="re_date">
+                  <input type="hidden" class="form-control " id="" value="{{datas[row].5}}" name="re_date">
                 </div>
 
                 <div class="form-group">
                   <label for="">สถานะ</label>
-                  <select class="form-select" name="re_status" aria-label="Default select example" value="{{row.6}}">
+                  <select class="form-select" name="re_status" aria-label="Default select example" value="{{datas[row].6}}">
                     <option value="ยืม">ยืม</option>
                     <option value="คืน">คืน</option>
                   </select>

@@ -22,9 +22,9 @@ def userindex():
         total = len(user)
         page,per_page,offset = get_page_args(page_parameter='page',per_page_parameter='per_page')
         pagination_user = user[offset:offset+10]
-        pagination_data = pagination_user
+        pagination_date = pagination_user
         pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap5')
-    return render_template('user/index_user.html', datas=rows,page=page, per_page=per_page, Pagination=pagination, len=total, user=pagination_data)
+    return render_template('user/index_user.html', datas=rows, page=page, per_page=per_page, Pagination=pagination, len=total, user=pagination_date)
 
     
 @Pageuse.route("/cresher", methods=["POST"])
@@ -40,7 +40,10 @@ def cresher():
             except:
                 return render_template('user/index_user.html', datas=('nodata'))
             rows = cur.fetchall()
-        return render_template('user/index_user.html', datas=rows)
+            user = list(range(len(rows)))
+            pagination_user = user
+            pagination = Pagination(css_framework='bootstrap5')
+        return render_template('user/index_user.html', datas=rows, Pagination=pagination, user=pagination_user)
 
 
 @Pageuse.route("/Useradding")

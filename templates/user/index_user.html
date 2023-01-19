@@ -7,13 +7,13 @@
 </div>
 <br>
 <form action="{{url_for('Pageuse.cresher')}}" method="POST">
-  <div class="input-group input-daterange">
+  <div class="d-inline-flex p-1">
     <input type="datetime-local" class="form-control" value="" name="dstart">
     &nbsp<h5>ถึง</h5>&nbsp
     <input type="datetime-local" class="form-control" value="" name="endstart">
-  </div>&nbsp
+  </div><br>
   <div class="col-auto">
-    <button type="submit" class="btn btn-success">ค้นหา</button>&nbsp
+    <button type="submit" class="btn btn-success">ค้นหา</button>
     <a href="/userindex" class="btn btn-primary">หน้าหลัก</a>
   </div>
 </form>
@@ -50,7 +50,7 @@
         <th>จำนวน</th>
         <th>วันที่ยืม</th>
         <th>สถานะ</th>
-        <th>action</th>
+        <th>แสดงรายละเอียด</th>
       </tr>
     </thead>
     {% for row in user %}
@@ -64,7 +64,7 @@
         <td>{{datas[row].5}}</td>
         <td>{{datas[row].6}}</td>
         <td>
-          <button type="button" class="btn btn-warning" title="รายละเอียด"><i class="bi bi-folder2-open"></i></button>
+          <a href="/detail_product?no={{datas[row].0}}">รายละเอียด<i class="bi bi-folder2-open"></i></a>
         </td>
       </tr>
     </tbody>

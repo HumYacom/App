@@ -32,7 +32,6 @@ def Checklog():
         if len(rows) > 0:
             session['username'] = username
             session['Name'] = rows[0][1]
-            session.permanent = True
             return redirect(url_for('Document_products.Admin_index'))
         else:
             flash("User or password ไม่ถูกต้อง")

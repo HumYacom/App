@@ -5,7 +5,8 @@ INNER JOIN inventory ON Products.Product_type = inventory.Product_type;
 
 
 ----borrow-----
-SELECT requisition.re_no, user.User_name, requisition.re_pstatus, inventory.Product_type, requisition.re_unit,	requisition.re_date,	requisition.re_status
-FROM ((requisition
-INNER JOIN inventory ON requisition.Product_type = inventory.Product_type)
-INNER JOIN user ON requisition.User_name = user.User_name);
+SELECT requisition.re_no, requisition.User_name, requisition.re_pstatus, requisition.Product_type, requisition.re_unit,Products.Product_manner, requisition.re_date,inventory.type_id,requisition.re_status  
+FROM ((Products
+INNER JOIN inventory ON Products.Product_type = inventory.Product_type)
+INNER JOIN requisition ON Products.Product_type = requisition.Product_type)
+WHERE requisition.re_no;

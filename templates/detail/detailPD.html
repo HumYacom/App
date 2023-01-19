@@ -1,0 +1,64 @@
+{% extends "detail/layout_detailPD.html"%}
+
+{% block content %}
+<br><br><br><br><br><br>
+<a href="/userindex" class="btn btn-primary">หน้าหลัก</a>
+<div class="d-flex justify-content-center">
+    <h4>รายละเอียดสินค้า</h4>
+</div><br>
+{% for row in datas %}
+<div>
+    <form action="{{url_for('detailpd.detail_product')}}" method="POST">
+
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <label for="">รายการที่</label>
+                <input type="text" class="form-control" id="" name="re_no" value="{{row.0}}" disabled>
+            </div>
+            <div class="col-md-3">
+                <label for="">ชื่อผู้ยืม</label>
+                <input type="text" class="form-control" id="" name="User_name" value="{{row.1}}" disabled>
+            </div>
+        </div><br>
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <label for="">แผนก</label>
+                <input type="text" class="form-control" id="" name="re_pstatus" value="{{row.2}}" disabled>
+            </div>
+            <div class="col-md-3">
+                <label for="">ชื่อวัสดุ</label>
+                <input type="text" class="form-control" id="" name="Product_type" value="{{row.3}}" disabled>
+            </div>
+        </div><br>
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <label for="">จำนวนที่ยืม</label>
+                <input type="text" class="form-control" id="" name="re_unit" value="{{row.4}}" disabled>
+            </div>
+            <div class="col-md-3">
+                <label for="">ยี่ห้อ</label>
+                <input type="text" class="form-control" id="" name="Product_manner" value="{{row.5}}" disabled>
+            </div>
+        </div><br>
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <label for="">เวลาที่ยืม</label>
+                <input type="text" class="form-control" id="" name="re_date" value="{{row.6}}" disabled>
+            </div>
+            <div class="col-md-3">
+                <label for="">ประเภทวัสดุ</label>
+                <input type="text" class="form-control" id="" name="type_id" value="{{row.7}}" disabled>
+            </div>
+        </div><br>
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <label for="">สถานะ</label>
+                <input type="text" class="form-control" id="" name="re_status" value="{{row.8}}" disabled>
+            </div>
+            <div class="col-md-3"></div>
+        </div><br>
+
+    </form>
+</div>
+{% endfor %}
+{% endblock %}
