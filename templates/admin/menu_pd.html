@@ -2,11 +2,15 @@
 
 {% block content %}
 <br><br><br><br><br><br>
+<h5 class="d-flex flex-row-reverse">Welcome user {{session['Name']}}</h5>
+<div class="d-flex flex-row-reverse">
+    <a href="/logout" class="btn btn-info">Logout</a>
+</div>
 <div class="d-flex justify-content-center">
     <h3>รายการวัสดุ</h3>
 </div>
 <div class="container">
-    <h5 class="align-self-start">รายการวัสดุ
+    <h5 class="align-self-start">เพิ่มรายการ
         <a href="/PDadding" class="btn btn-warning"><i class="bi bi-node-plus-fill"></i>&nbsp ADD</a>
     </h5>
     <table class="table table-success table-striped">
@@ -14,13 +18,14 @@
             <tr>
                 <th>รายการที่</th>
                 <th>ชื่อวัสดุ</th>
-                <th>ประเภทวัสดุ</th>
+                <th>หมวดหมู่</th>
                 <th>ยีห้อ</th>
                 <th>จำนวน</th>
                 <th>วันที่ซื้อ</th>
                 <th>ชื่อกำกับ</th>
                 <th>ชนิดวัสดุ</th>
-                <th>แสดงรายละเอียด</th>
+                <th>ยอดคงเหลือ</th>
+                <th></th>
             </tr>
         </thead>
         {% for row in datas %}
@@ -34,6 +39,7 @@
                 <td>{{row.5}}</td>
                 <td>{{row.6}}</td>
                 <td>{{row.7}}</td>
+                <td>{{row.8}}</td>
                 <td>
                     <button type="button" class="btn btn-warning" title="Edit" data-toggle="tooltip"
                         data-bs-toggle="modal" data-bs-target="#exampleModal{{row.0}}"><i
@@ -45,18 +51,18 @@
                 </td>
             </tr>
             <!--Delect-->
-            <div class="modal fade" id="staticBackdrop{{row.0}}" data-bs-backdrop="static"
-                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="staticBackdrop{{row.0}}" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5 text-black" id="staticBackdropLabel">ยืนยันการลบ ?</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{url_for('PD.PD_del')}}" method="POST">
+                        <form action="{{url_for('Document_products.PD_del')}}" method="POST">
 
                             <div class="modal-body text-black">
-                                <h3>Do you want deletc {{row.1}} ?</h3>
+                                <h3>ต้องการที่จะลบรายการ {{row.1}} หรือไม่!!!</h3>
                             </div>
                             <input type="hidden" name="Product_id" value="{{row.0}}">
 
@@ -79,24 +85,28 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-black">
-                            <form action="{{url_for('PD.PD_edit')}}" method="POST">
+                            <form action="{{url_for('Document_products.PD_edit')}}" method="POST">
 
                                 <div class="form-group">
-                                    <input type="hidden" class="form-control" id="" value="{{row.0}}"
-                                        name="Product_id">
+                                    <input type="hidden" class="form-control" id="" value="{{row.0}}" name="Product_id">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">ชื่อวัสดุ</label>
                                     <input type="text" class="form-control " id="" value="{{row.1}}"
-                                        name="Product_name">
+                                        name="Product_type">
                                 </div>
 
+
                                 <div class="form-group">
-                                    <label for="">ประเภทวัสดุ</label>
-                                    <input type="text" class="form-control" id="" value="{{row.2}}"
-                                        name="Product_category">
+                                    <label for="">หมวดหมู่</label>
+                                    <select name="Product_category" class="form-select" value="{{row.2}}">
+                                        <option value="สำนักงาน">สำนักงาน</option>
+                                        <option value="คอมพิวเตอร์">คอมพิวเตอร์</option>
+                                        <option value="อื่น ๆ">อื่น ๆ</option>
+                                    </select>
                                 </div>
+
 
                                 <div class="form-group">
                                     <label for="">ยีห้อ</label>
@@ -117,14 +127,16 @@
 
                                 <div class="form-group">
                                     <label for="">ชื่อกำกับ</label>
-                                    <input type="text" class="form-control " id="" value="{{row.6}}"
-                                        name="type_id">
+                                    <input type="text" class="form-control " id="" value="{{row.6}}" name="type_id">
                                 </div>
+
 
                                 <div class="form-group">
                                     <label for="">ชนิดวัสดุ</label>
-                                    <input type="text" class="form-control " id="" value="{{row.7}}"
-                                        name="Product_status">
+                                    <select name="Product_status" class="form-select" value="{{row.7}}">
+                                        <option value="คงที่">คงที่</option>
+                                        <option value="สิ้นเปลือก">สิ้นเปลือก</option>
+                                    </select>
                                 </div>
 
                                 <div class="modal-footer">

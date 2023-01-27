@@ -8,29 +8,29 @@
 </div>
 <div class="container">
   <h3 class="d-flex justify-content-center">รายการคำร้อง</h3><br>
-<form action="{{url_for('Document_products.cresheradmin')}}" method="POST">
-    <div class="d-inline-flex p-1">
-      <select name="dstart" class="form-select">
-        <option value="">----ค้นหา----</option>
-        <option value="บัญชี">บัญชี</option>
-        <option value="ฝ่ายขาย">ฝ่ายขาย</option>
-        <option value="จัดซื้อ">จัดซื้อ</option>
-        <option value="บุคคล">บุคคล</option>
-        <option value="QC/QA">QC/QA</option>
-        <option value="วิจัยและพัฒนา">วิจัยและพัฒนา</option>
-        <option value="คลังสินค้า">คลังสินค้า</option>
-        <option value="ซ่อมบำรุง">ซ่อมบำรุง</option>
-        <option value="ผลิต">ผลิต</option>
-        <option value="IT">IT</option>
-      </select>
-    </div><br>
+  <form action="{{url_for('Document_products.cresheradmin')}}" method="POST">
     <div class="col-auto">
       <button type="submit" class="btn btn-success">ค้นหา</button>
       <a href="/Admin_index" class="btn btn-primary">หน้าหลัก</a>
+      <div class="d-inline-flex p-1">
+        <select name="dstart" class="form-select">
+          <option value="">----ค้นหา----</option>
+          <option value="บัญชี">บัญชี</option>
+          <option value="ฝ่ายขาย">ฝ่ายขาย</option>
+          <option value="จัดซื้อ">จัดซื้อ</option>
+          <option value="บุคคล">บุคคล</option>
+          <option value="QC/QA">QC/QA</option>
+          <option value="วิจัยและพัฒนา">วิจัยและพัฒนา</option>
+          <option value="คลังสินค้า">คลังสินค้า</option>
+          <option value="ซ่อมบำรุง">ซ่อมบำรุง</option>
+          <option value="ผลิต">ผลิต</option>
+          <option value="IT">IT</option>
+        </select>
+      </div><br>
     </div>
   </form>
   <br>
-{{Pagination.links}}
+  {{Pagination.links}}
   <table class="table table-success table-striped">
     <thead class="table-success">
       <tr>
@@ -126,7 +126,8 @@
 
                 <div class="form-group">
                   <label for="">สถานะ</label>
-                  <select class="form-select" name="re_status" aria-label="Default select example" value="{{datas[row].6}}">
+                  <select class="form-select" name="re_status" aria-label="Default select example"
+                    value="{{datas[row].6}}">
                     <option value="ยืม">ยืม</option>
                     <option value="คืน">คืน</option>
                   </select>

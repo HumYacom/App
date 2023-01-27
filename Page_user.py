@@ -11,7 +11,7 @@ Pageuse = Blueprint('Pageuse', __name__)
 @Pageuse.route("/userindex")
 def userindex():
     with db.cursor() as cur:
-        sql = "SELECT * FROM requisition"
+        sql = "SELECT * FROM record ORDER BY re_date DESC"
         try:
             cur.execute(sql)
             db.commit()
@@ -33,7 +33,7 @@ def cresher():
         dstart = request.form['dstart']
         endstart = request.form['endstart']
         with db.cursor() as cur:
-            sql = "SELECT * FROM requisition WHERE re_date BETWEEN %s AND %s"
+            sql = "SELECT * FROM record WHERE re_date BETWEEN %s AND %s"
             try:
                 cur.execute(sql, (dstart, endstart))
                 db.commit()
@@ -45,6 +45,22 @@ def cresher():
             pagination = Pagination(css_framework='bootstrap5')
         return render_template('user/index_user.html', datas=rows, Pagination=pagination, user=pagination_user)
 
+@Pageuse.route("/cresher2", methods=["POST"])
+def cresher2():
+    if request.method == "POST":
+        dfname = request.form['dfname']
+        with db.cursor() as cur:
+            sql = "SELECT * FROM record WHERE User_name = %s"
+            try:
+                cur.execute(sql, (dfname))
+                db.commit()
+            except:
+                return render_template('user/index_user.html', datas=('nodata'))
+            rows = cur.fetchall()
+            user = list(range(len(rows)))
+            pagination_user = user
+            pagination = Pagination(css_framework='bootstrap5')
+        return render_template('user/index_user.html', datas=rows, Pagination=pagination, user=pagination_user)
 
 @Pageuse.route("/Useradding")
 def useradding():
@@ -62,9 +78,20 @@ def userAdd():
         re_date = request.form['re_date']
         re_status = request.form['re_status']
         with db.cursor() as cur:
-            sql = "INSERT INTO requisition (re_no,User_name,re_pstatus,Product_type,re_unit,re_date,re_status) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+            sql = "INSERT INTO record (re_no,User_name,re_pstatus,Product_type,Product_export,re_date,re_status) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+            sql2 = "UPDATE record SET Product_export = Product_export - %s  WHERE re_no = %s;"
+            sql3 = "SELECT Product_quantity, Product_id FROM products WHERE Product_type = %s"
             try:
                 cur.execute(sql, (runum, User_name, re_pstatus,Product_type, re_unit, re_date, re_status))
+                db.commit()
+                cur.execute(sql2, (re_unit,runum))
+                db.commit()
+                cur.execute(sql3, (Product_type))
+                db.commit()
+                
+                rows = cur.fetchall()
+                sql4 = "UPDATE products SET Product_quantity = Product_quantity - %s WHERE Product_id = %s"
+                cur.execute(sql4, (re_unit,rows[0][1]))
                 db.commit()
                 flash(
                     "ได้ทำการส่งเรื่องขอวัสดุแล้วกำลังส่งข้อมูล...กรุณารอสักครู่ครับ")

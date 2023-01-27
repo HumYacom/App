@@ -3,61 +3,68 @@
 {% block content %}
 <br><br><br><br><br><br>
 <div class="d-flex justify-content-center">
-  <h3>ใบเบิกวัสดุ</h3>
+  <h3>เพิ่มรายการวัสดุ</h3>
 </div>
 <br>
 <div class="container">
-  <form action="{{url_for('PD.PDAdd')}}" method="POST">
+  <form action="{{url_for('Document_products.PDAdd')}}" method="POST">
 
     <div class="form-group">
-      <input type="hidden" class="form-control" id="" name="Product_id" >
+      <input type="hidden" class="form-control" id="" name="Product_id">
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-3">
+        <label for="">ชื่อ</label>
+        <input type="text" class="form-control" id="" name="Product_type">
+      </div>&nbsp
+      <div class="col-md-3">
+        <label for="">ยี่ห้อ</label>
+        <input type="text" class="form-control" id="" name="Product_manner">
+      </div>
     </div>&nbsp
 
-    <div class="form-group">
-      <label for="">ชื่อ</label>
-      <input type="text" class="form-control" id="" name="Product_name" >
+    <div class="row justify-content-center">
+      <div class="col-md-3">
+        <label for="">จำนวน</label>
+        <input type="text" class="form-control" id="" name="Product_price">
+      </div>&nbsp
+      <div class="col-md-3">
+        <label for="">ชื่อทะเบียน</label>
+        <input type="text" class="form-control" id="" name="type_id">
+      </div>
     </div>&nbsp
 
-    <div class="form-group">
-      <label for="">ชื่อประเภท</label>
-      <input type="text" class="form-control" id="" name="Product_type" >
+    <div class="row justify-content-center">
+      <div class="col-md-3">
+        <label for="">หมวดหมู่</label>
+        <select name="Product_category" class="form-select">
+          <option value="สำนักงาน">สำนักงาน</option>
+          <option value="คอมพิวเตอร์">คอมพิวเตอร์</option>
+          <option value="อื่น ๆ">อื่น ๆ</option>
+        </select>
+      </div>&nbsp
+      <div class="col-md-3">
+        <label for="">ชนิดวัสดุ</label>
+        <select name="Product_status" class="form-select">
+          <option value="คงที่">คงที่</option>
+          <option value="สิ้นเปลือก">สิ้นเปลือก</option>
+        </select>
+      </div>
     </div>&nbsp
 
-    <div class="form-group">
-      <label for="">ยี่ห้อ</label>
-      <input type="text" class="form-control" id="" name="Product_manner" >
-    </div>&nbsp
+    <div class="row justify-content-center">
+      <div class="col-md-3">
+        <label for="">วันที่ซื้อ</label>
+        <input type="datetime-local" class="form-control" id="" name="Product_date">
+      </div>
+    </div>
 
-    <div class="form-group">
-      <label for="">จำนวน</label>
-      <input type="text" class="form-control" id="" name="Product_price" >
-    </div>&nbsp
-
-    <div class="form-group">
-      
-      <input type="hidden" class="form-control" id="" name="Product_date" >
-    </div>&nbsp
-
-    <div class="form-group">
-      <label for="">ชื่อระดับ</label>
-      <input type="text" class="form-control" id="" name="type_id" >
-    </div>&nbsp
-
-    <div class="form-group">
-      <label for="">หนวก</label>
-      <input type="text" class="form-control" id="" name="Product_status" >
-    </div>&nbsp
-
-    <div class="form-group">
-      <label for="">ประเภทวัสดุ</label>
-      <input type="text" class="form-control" id="" name="Product_category" >
-    </div>&nbsp
-
-<div class="modal-footer">
-  <a href="{{url_for('PD.pd')}}" class="btn btn-primary">Back</a> &nbsp
-  <button type="submit" class="btn btn-success">ตกลง</button>
-</div>
-</form>
+    <div class="modal-footer">
+      <a href="{{url_for('Document_products.pd')}}" class="btn btn-primary">Back</a> &nbsp
+      <button type="submit" class="btn btn-success">ตกลง</button>
+    </div>
+  </form>
 </div>
 
 

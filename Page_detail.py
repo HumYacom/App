@@ -13,7 +13,7 @@ def detail_product():
     args = request.args
     data = args.get('no')
     with db.cursor() as cur:
-        sql = "SELECT requisition.re_no, requisition.User_name, requisition.re_pstatus, requisition.Product_type, requisition.re_unit,Products.Product_manner, requisition.re_date,inventory.type_id,requisition.re_status FROM ((Products INNER JOIN inventory ON Products.Product_type = inventory.Product_type) INNER JOIN requisition ON Products.Product_type = requisition.Product_type) WHERE requisition.re_no = %s;"
+        sql = "SELECT record.re_no, record.User_name, record.re_pstatus, record.Product_type, record.re_unit, Products.Product_manner, record.re_date, inventory.type_id, record.re_status FROM ((Products INNER JOIN inventory ON Products.Product_type = inventory.Product_type) INNER JOIN record ON Products.Product_type = requisition.Product_type) WHERE requisition.re_no = %s;"
         try:
             cur.execute(sql,(data))
             db.commit()
