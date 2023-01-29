@@ -14,7 +14,7 @@ def Admin_index():
     if "username" not in session:
         return render_template('login.html')
     with db.cursor() as cur:
-        sql = "SELECT * FROM record"
+        sql = "SELECT * FROM record ORDER BY re_date DESC"
         try:
             cur.execute(sql)
             db.commit()

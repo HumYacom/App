@@ -53,7 +53,7 @@
         <input type="text" class="form-control" id="" name="re_unit" required>
       </div>
     </div><br>
-    
+
     <div class="row justify-content-center">
       <div class="col-md-3">
         <label for="">วันที่ยืม</label>
@@ -61,17 +61,21 @@
       </div>&nbsp
       <div class="col-md-3">
         <label for="">สถานะ</label>
-      <select name="re_status" class="form-control">
+        <select name="re_status" required="required" class="form-select">
+          <option value="">--กรุณาเลือกสถานะ--</option>
+          <option value="เบิกจ่าย">เบิกจ่าย</option>
           <option value="ยืม">ยืม</option>
-      </select>
+          <option value="จำหน่ายออก">จำหน่ายออก</option>
+        </select>
       </div>
-    </div><br><br>
+    </div>
+    <br><br>
 
-<div class="modal-footer justify-content-center">
-  <a href="{{url_for('Pageuse.userindex')}}" class="btn btn-primary">Back</a> &nbsp
-  <button type="submit" class="btn btn-success">ตกลง</button>
-</div>
-</form>
+    <div class="modal-footer justify-content-center">
+      <a href="{{url_for('Pageuse.userindex')}}" class="btn btn-primary">Back</a> &nbsp
+      <button type="submit" class="btn btn-success">ตกลง</button>
+    </div>
+  </form>
 </div>
 
 

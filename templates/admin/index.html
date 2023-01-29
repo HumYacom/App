@@ -30,7 +30,16 @@
     </div>
   </form>
   <br>
-  {{Pagination.links}}
+  <div class="row d-flex p-2">
+    <div class="col-md-3">
+      <h5 class="align-self-start">รายการวัสดุ
+        <a href="" class="btn btn-warning"><i class="bi bi-node-plus-fill"></i>&nbsp ADD</a>
+      </h5>
+    </div>
+    <div class="col-md-3">
+      {{Pagination.links}}
+    </div>
+  </div>
   <table class="table table-success table-striped">
     <thead class="table-success">
       <tr>

@@ -5,36 +5,6 @@
 <div class="d-flex justify-content-center">
   <h3>รายการวัสดุ</h3>
 </div>
-<form action="{{url_for('Pageuse.cresher')}}" method="POST">
-  <label for="">
-    <h4>ค้นหาเวลา</h4>
-  </label>
-  <div class="col-auto">
-    <div class="d-inline-flex p-1">
-      <input type="datetime-local" class="form-control" value="" name="dstart">
-      &nbspถึง</h3>&nbsp
-      <input type="datetime-local" class="form-control" value="" name="endstart">
-    </div>
-    <button type="submit" class="btn btn-success">ค้นหา</button>
-    <a href="/userindex" class="btn btn-primary">หน้าหลัก</a>
-
-  </div>
-</form>
-<br>
-<form action="{{url_for('Pageuse.cresher2')}}" method="POST">
-  <label for="">
-    <h4>ค้นหาชื่อผู้ยืม</h4>
-  </label>
-  <div class="col-md-3">
-    <div class="d-inline-flex p-1">
-      <input type="text" class="form-control" value="" name="dfname">
-    </div>
-    <button type="submit" class="btn btn-success">ค้นหา</button>
-  </div>
-</form>
-
-
-
 <br>
 {% with messages = get_flashed_messages() %}
 {% if messages %}
@@ -53,11 +23,50 @@
 {% endfor %}
 {% endif %}
 {% endwith %}
-{{Pagination.links}}
 <div class="container">
-  <h5 class="align-self-start">รายการวัสดุ
-    <a href="/Useradding" class="btn btn-warning"><i class="bi bi-node-plus-fill"></i>&nbsp ADD</a>
-  </h5>
+  <div class="row d-flex p-2">
+    <div class="col-md-3">
+      <form action="{{url_for('Pageuse.cresher')}}" method="POST">
+        <label for="">
+          <h4>ค้นหาเวลา</h4>
+        </label>
+        <div class="col-auto">
+          <div class="d-inline-flex p-1">
+            <input type="datetime-local" class="form-control" value="" name="dstart">
+            &nbspถึง</h3>&nbsp
+            <input type="datetime-local" class="form-control" value="" name="endstart">
+          </div>
+          <button type="submit" class="btn btn-success">ค้นหา</button>
+          <a href="/userindex" class="btn btn-primary">หน้าหลัก</a>
+        </div>
+      </form>
+    </div>
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <div class="col-md-3">
+      <form action="{{url_for('Pageuse.cresher2')}}" method="POST">
+        <label for="">
+          <h4>ค้นหาชื่อผู้ยืม</h4>
+        </label>
+        <div class="col-auto">
+          <div class="d-inline-flex p-1">
+            <input type="text" class="form-control" value="" name="dfname">
+          </div>
+          <button type="submit" class="btn btn-success">ค้นหา</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br>
+  <div class="row d-flex p-2">
+    <div class="col-md-3">
+      <h5 class="align-self-start">รายการวัสดุ
+        <a href="/Useradding" class="btn btn-warning"><i class="bi bi-node-plus-fill"></i>&nbsp ADD</a>
+      </h5>
+    </div>
+    <div class="col-md-3">
+      {{Pagination.links}}
+    </div>
+  </div>
   <table class="table table-success table-striped">
     <thead class="table-success">
       <tr>
@@ -67,7 +76,8 @@
         <th>จำนวน</th>
         <th>วันที่ยืม</th>
         <th>สถานะ</th>
-        <th>แสดงรายละเอียด</th>
+        <!--
+        <th>แสดงรายละเอียด</th>-->
       </tr>
     </thead>
     {% for row in user %}
@@ -77,14 +87,16 @@
         <td>{{datas[row].2}}</td>
         <td>{{datas[row].3}}</td>
         <td>{{datas[row].4}}</td>
-        <td>{{datas[row].5}}</td>
         <td>{{datas[row].6}}</td>
+        <td>{{datas[row].7}}</td>
+        <!--
         <td>
           <a href="/detail_product?no={{datas[row].0}}">รายละเอียด<i class="bi bi-folder2-open"></i></a>
-        </td>
+        </td>-->
       </tr>
     </tbody>
     {% endfor %}
   </table>
 </div>
+
 {% endblock %}

@@ -81,12 +81,15 @@ def userAdd():
             sql = "INSERT INTO record (re_no,User_name,re_pstatus,Product_type,Product_export,re_date,re_status) VALUES (%s,%s,%s,%s,%s,%s,%s)"
             sql2 = "UPDATE record SET Product_export = Product_export - %s  WHERE re_no = %s;"
             sql3 = "SELECT Product_quantity, Product_id FROM products WHERE Product_type = %s"
+            sql5 = "INSERT INTO borrow (borrow_no,Product_type,borrow_date,borrow_unit,User_name) VALUES (%s,%s,%s,%s,%s)"
             try:
                 cur.execute(sql, (runum, User_name, re_pstatus,Product_type, re_unit, re_date, re_status))
                 db.commit()
                 cur.execute(sql2, (re_unit,runum))
                 db.commit()
                 cur.execute(sql3, (Product_type))
+                db.commit()
+                cur.execute(sql5, (runum,Product_type,re_date,re_unit,User_name))
                 db.commit()
                 
                 rows = cur.fetchall()
