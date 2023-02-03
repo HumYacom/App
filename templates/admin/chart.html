@@ -1,0 +1,41 @@
+{% extends "admin/layout_admin.html "%}
+
+{% block content %}
+<br><br><br><br><br><br><br>
+<h5 class="d-flex flex-row-reverse">Welcome By {{session['Name']}}</h5>
+<div class="d-flex flex-row-reverse">
+    <a href="/logout" class="btn btn-info">Logout</a>
+</div>
+<h4 class="d-flex justify-content-center">สถิติสินค้าทั้งหมด</h4><br>
+<div class="container col-md-3">
+    <canvas id="myChart" width="400" height="400"></canvas>
+</div>
+
+<script>
+    const ctx = document.getElementById('myChart');
+    var chart_export = `{% for export in chart_export %}{{chart_export[export]}},{%endfor%}`;
+    const export_arr = chart_export.split(',');
+
+    var chart_label = `{% for export in chart_export %}{{export}},{%endfor%}`;
+    const lable_arr = chart_label.split(',');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: lable_arr,
+            datasets: [{
+                label: '# of Votes',
+                data: export_arr,
+        borderWidth: 1
+                }]
+            },
+        options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+        });
+</script>
+</form>
+{% endblock %}

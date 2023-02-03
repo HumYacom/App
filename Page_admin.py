@@ -220,3 +220,60 @@ def menubroken():
 @Document_products.route("/Borrow")
 def Borrow():
     return
+    
+#Chart.js
+@Document_products.route("/chartjs")
+def chartjs():
+    try:
+        with db.cursor() as cur:
+
+            query_type = "select Product_type from record" # query product_type
+            cur.execute(query_type)
+            db.commit() # fetch up to date data
+
+            query_type_data = cur.fetchall()
+
+            # chart config
+            chart_export = {}
+            chart_import = {}
+
+            # extract
+            for type in query_type_data:
+                chart_export.update(
+                    {
+                        str(type[0]): 0
+                    }
+                )
+
+                chart_import.update(
+                    {
+                        str(type[0]): 0
+                    }
+                )
+
+
+            for type_query in chart_export:
+                query_export = "select SUM(Product_export) AS Sum\
+                    from record\
+                    where Product_type = %s"
+
+                cur.execute(query_export, type_query)
+                db.commit()
+
+                sumary_export = cur.fetchall()
+                chart_export[type_query] = int(sumary_export[0][0])
+
+            for type_query in chart_export:
+                query_import = "select SUM(Product_import) AS Sum\
+                    from record\
+                    where Product_type = %s"
+
+                cur.execute(query_import, type_query)
+                db.commit()
+
+                sumary_import = cur.fetchall()
+                chart_import[type_query] = int(sumary_import[0][0])
+
+        return render_template('admin/chart.html' ,chart_import = chart_import, chart_export=chart_export)
+    except:
+        return render_template('admin/chart.html' ,chart_import = chart_import, chart_export=chart_export)
